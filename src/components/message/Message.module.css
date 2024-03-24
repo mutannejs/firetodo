@@ -1,0 +1,5 @@
+.msg {
+    padding: 1.5rem;
+    background-color: var(--main-bg-color);
+    margin-bottom: 1rem;
+}

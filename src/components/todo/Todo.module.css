@@ -1,0 +1,73 @@
+.todo {
+    background-color: var(--main-bg-color-light);
+    border: 1px solid var(--main-bg-color);
+    border-radius: 5px;
+    margin: .7rem 0;
+}
+
+.static {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: .3rem .5rem;
+}
+
+.comment {
+    display: none;
+    padding: 0 .5rem .3rem;
+    text-align: left;
+    font-size: .9rem;
+}
+
+.comment span {
+    font-weight: bold;
+}
+
+.todo:hover .static {
+    border-bottom: 1px solid var(--main-color);
+    padding-bottom: .3rem;
+}
+
+.todo:hover .comment {
+    display: block;
+}
+
+.completed p {
+    text-decoration: line-through;
+}
+
+.completed .btn_check {
+    color: #00FF7F;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+}
+
+button {
+    background-color: var(--main-bg-color-light);
+    border: 1px solid var(--main-bg-color-light);
+    border-radius: 3px;
+    margin-left: .3rem;
+    padding: .3rem .3rem .2rem;
+    transition: .2s;
+}
+
+button:hover {
+    border-color: var(--main-bg-color);
+    background-color: var(--main-bg-color);
+    cursor: pointer;
+}
+
+button svg {
+    font-size: 1.1rem;
+}
+
+.btn_check {
+    color: var(--main-color);
+}
+
+.btn_delete {
+    color: var(--main-color-dark);
+}

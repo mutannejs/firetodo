@@ -1,0 +1,30 @@
+.btn button {
+    padding: .5rem 0;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-bottom: 3px solid var(--main-color);
+    border-radius: 0px;
+    background-color: #fff;
+    color: var(--main-color);
+    margin-left: .25rem;
+    margin-right: .25rem;
+    white-space: nowrap;
+}
+
+.btn button:hover {
+    cursor: pointer;
+    border-color: var(--main-bg-color);
+    color: var(--main-bg-color);
+}
+
+.navigate a {
+    font-size: .8rem;
+    text-decoration: none;
+    border-bottom: 2px solid #fff;
+    color: var(--main-color);
+}
+
+.navigate a:hover {
+    color: var(--main-bg-color);
+}

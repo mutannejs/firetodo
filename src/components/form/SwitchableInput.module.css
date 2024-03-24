@@ -1,0 +1,90 @@
+/* === Valores atuais === */
+
+.current {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.current p {
+    flex: 4;
+    text-align: left;
+    font-size: .9rem;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.current span {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+
+
+/* ==== Botões form ==== */
+
+.current button, .field_container button {
+    flex: 1;
+    padding: .5rem 0;
+    font-size: .8rem;
+    background-color: #fff;
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+    margin-left: .5rem;
+}
+
+.current button:hover, .field_container button:hover {
+    cursor: pointer;
+    background-color: var(--main-color);
+    border-color: var(--main-bg-color);
+    color: var(--main-bg-color);
+}
+
+
+
+/* ====== Inputs ====== */
+
+.field_container {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    margin-bottom: .3rem;
+}
+
+.field label {
+    font-weight: bold;
+    margin-right: .5rem;
+}
+
+.field input {
+    flex-grow: 1;
+    font-size: .9rem;
+    padding: .4rem 0;
+    color: var(--main-color);
+    border: none;
+    border-bottom: 2px solid var(--main-color);
+    text-shadow: 1px 1px 10px var(--main-bg-color);
+}
+
+.field input:focus {
+    outline: 0;
+}
+
+.buttons {
+    text-align: end;
+}
+
+.buttons button {
+    padding: .5rem .5rem;
+}
+
+.buttons span {
+    font-size: .8rem;
+    color: rgba(200, 0, 0, 0.7);
+}

@@ -1,0 +1,56 @@
+form {
+    margin: 2rem auto 1rem;
+    max-width: 500px;
+}
+
+.field {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.field label {
+    font-weight: bold;
+}
+
+.field input {
+    width: 100%;
+    font-size: .9rem;
+    padding: .2rem 0;
+    margin: .4rem 0 .2rem;
+    color: var(--main-color);
+    border: none;
+    border-bottom: 2px solid var(--main-color);
+    text-shadow: 1px 1px 10px var(--main-bg-color);
+}
+
+.field input:focus {
+    outline: 0;
+}
+
+.field .erro {
+    text-align: right;
+    height: 1rem;
+    margin-bottom: 2rem;
+}
+
+.field .erro span {
+    right: 0;
+    font-size: .8rem;
+    color: rgba(200, 0, 0, 0.7);
+}
+
+.btn button {
+    padding: .5rem 0;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-bottom: 3px solid var(--main-color);
+    background-color: #fff;
+    color: var(--main-color);
+}
+
+.btn button:hover {
+    cursor: pointer;
+    border-color: var(--main-bg-color);
+    color: var(--main-bg-color);
+}

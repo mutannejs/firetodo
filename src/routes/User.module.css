@@ -1,0 +1,38 @@
+.user_container form {
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.current {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.current p {
+    flex: 4;
+    text-align: left;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.current span {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.buttons {
+    display: flex;
+    width: min-content;
+    margin: 0 auto;
+}
+
+.delete_account {
+    margin-top: 2rem;
+}
+
+.delete_account button {
+    font-size: .9rem;
+    color: #ff3535;
+    border-bottom: 2px solid #ff3535;
+}

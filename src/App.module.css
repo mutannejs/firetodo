@@ -1,0 +1,6 @@
+.container {
+    text-align: center;
+    padding: 2rem;
+    min-height: 75vh;
+    color: var(--main-color);
+}

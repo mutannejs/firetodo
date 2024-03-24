@@ -1,0 +1,11 @@
+.container {
+    margin: 12rem 0;
+    text-align: center;
+    min-height: 32vh;
+    color: #765f66;
+}
+
+.container h1 {
+    font-size: 5rem;
+    margin-bottom: 2rem;
+}

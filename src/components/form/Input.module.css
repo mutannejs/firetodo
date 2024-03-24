@@ -1,0 +1,47 @@
+.field {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.field label {
+    font-weight: bold;
+}
+
+.field input, .field textarea {
+    width: 100%;
+    font-size: .9rem;
+    padding: .2rem 0;
+    margin: .4rem 0 .2rem;
+    color: var(--main-color);
+    border: none;
+    border-bottom: 2px solid var(--main-color);
+    text-shadow: 1px 1px 10px var(--main-bg-color);
+}
+
+.field textarea {
+    min-height: 6rem;
+    padding: .2rem .2rem;
+    resize: vertical;
+    border: 1px solid var(--main-color);
+}
+
+.field input:focus, .field textarea:focus {
+    outline: 0;
+}
+
+.field input::placeholder, .field textarea::placeholder {
+    text-shadow: none;
+    font-size: .8rem;
+}
+
+.field .erro {
+    text-align: right;
+    height: 1rem;
+    margin-bottom: 2rem;
+}
+
+.field .erro span {
+    right: 0;
+    font-size: .8rem;
+    color: rgba(200, 0, 0, 0.7);
+}

@@ -30,7 +30,8 @@ const Home = ({ db }) => {
         const q = query(
             collection(db, 'todos'),
             where('uid', '==', user.uid),
-            orderBy('completed')
+            orderBy('completed'),
+            orderBy('order')
         );
         getDocs(q)
             .then((querySnapshot) => {
@@ -40,13 +41,15 @@ const Home = ({ db }) => {
                         id: todo.id,
                         todo: todo.data().todo,
                         comment: todo.data().comment,
-                        completed: todo.data().completed
+                        completed: todo.data().completed,
+                        order: todo.data().order
                     });
                 })
                 setTodos(arrayTodos);
+                console.log('todos atualizado');
             })
             .catch ((error) => {
-                setMessage(`Erro ao carregar tarefas: ${error}`)
+                setMessage(`Erro ao carregar tarefas: ${error}`);
             });
     }
 
@@ -57,6 +60,7 @@ const Home = ({ db }) => {
         } )
             .then(() => {
                 setMessage('Tarefa desmarcada!');
+                console.log(`${id} desmarcada`);
                 updateTodos();
             })
             .catch((error) => {
@@ -71,6 +75,7 @@ const Home = ({ db }) => {
         } )
             .then(() => {
                 setMessage('Tarefa marcada como concluída!');
+                console.log(`${id} marcado como condluída`);
                 updateTodos();
             })
             .catch((error) => {
@@ -83,7 +88,7 @@ const Home = ({ db }) => {
         deleteDoc( refDoc )
             .then(() => {
                 setMessage('Tarefa removida com sucesso!');
-                console.log(`${id} removido`);
+                console.log(`${id} removida`);
                 updateTodos();
             })
             .catch((error) => {

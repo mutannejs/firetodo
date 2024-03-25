@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik';
 // Yup
 import * as yup from 'yup';
 // Firebase
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, count, getCountFromServer, query, where } from "firebase/firestore";
 // Contexts
 import { LoginContext } from '../context/LoginContext';
 //Components
@@ -23,13 +23,23 @@ const NewTodo = ({ db }) => {
     validateAuth();
 
     const addTodo = (values, resetForm) => {
-        addDoc( collection(db, 'todos'), {
-                uid: user.uid,
-                todo: values.todo,
-                comment: values.comment,
-                completed: false,
-                timestamp: Date.now() // trocar por ordem
+        const q = query(
+            collection(db, 'todos'),
+            where('uid', '==', user.uid),
+            where('completed', '==', false)
+        );
+        getCountFromServer(q).then((querySnapshot) => {
+            return querySnapshot.data().count
         })
+            .then((countDocs) => {
+                return addDoc( collection(db, 'todos'), {
+                    uid: user.uid,
+                    todo: values.todo,
+                    comment: values.comment,
+                    completed: false,
+                    order: countDocs
+                })
+            })
             .then(() => {
                 setMessage('Tarefa adicionada com sucesso!');
                 resetForm();

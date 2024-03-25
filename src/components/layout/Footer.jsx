@@ -10,7 +10,7 @@ const Footer = () => {
       <p>
         <strong>FireTodo</strong>, feito por Mutanne JS
       </p>
-      <a href="https://github.com/mutannejs/" target='_blak'>
+      <a href="https://github.com/mutannejs/firetodo" target='_blak'>
         <DiGithubBadge />
       </a>
     </footer>

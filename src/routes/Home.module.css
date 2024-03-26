@@ -7,6 +7,19 @@
     list-style: none;
 }
 
+.todos ul li {
+    display: flex;
+    align-items: center;
+}
+
+.todos > ul > li > svg {
+    margin-right: .5rem;
+}
+
+.todos > ul > li > svg:hover {
+    cursor: pointer;
+}
+
 .container {
     margin: 10rem 0;
     text-align: center;

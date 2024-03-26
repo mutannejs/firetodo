@@ -1,8 +1,9 @@
-// React e React-router-dom
+// React, React-router-dom, React-icons
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { BsThreeDotsVertical } from "react-icons/bs";
 // Firebase
-import { query, collection, getDocs, where, deleteDoc, doc, updateDoc, orderBy } from 'firebase/firestore';
+import { query, collection, getDocs, where, deleteDoc, doc, updateDoc, orderBy, getCountFromServer } from 'firebase/firestore';
 // Contexts
 import { LoginContext } from '../context/LoginContext';
 // Components
@@ -15,6 +16,7 @@ const Home = ({ db }) => {
 
     const { user } = useContext(LoginContext);
     const [todos, setTodos] = useState([]);
+    //const [numChecked, setNumChecked] = useState();
     const [message, setMessage] = useState('');
     const location = useLocation();
     
@@ -31,7 +33,7 @@ const Home = ({ db }) => {
             collection(db, 'todos'),
             where('uid', '==', user.uid),
             orderBy('completed'),
-            orderBy('order')
+            orderBy('order', 'desc')
         );
         getDocs(q)
             .then((querySnapshot) => {
@@ -46,10 +48,13 @@ const Home = ({ db }) => {
                     });
                 })
                 setTodos(arrayTodos);
-                console.log('todos atualizado');
+            })
+            .then(() => {
+                console.log('todos carregados');
             })
             .catch ((error) => {
                 setMessage(`Erro ao carregar tarefas: ${error}`);
+                console.log(`Erro ao carregar tarefas: ${error}`);
             });
     }
 
@@ -59,9 +64,9 @@ const Home = ({ db }) => {
             completed: false
         } )
             .then(() => {
+                updateTodos();
                 setMessage('Tarefa desmarcada!');
                 console.log(`${id} desmarcada`);
-                updateTodos();
             })
             .catch((error) => {
                 console.log(error);
@@ -74,9 +79,9 @@ const Home = ({ db }) => {
             completed: true
         } )
             .then(() => {
+                updateTodos();
                 setMessage('Tarefa marcada como concluída!');
                 console.log(`${id} marcado como condluída`);
-                updateTodos();
             })
             .catch((error) => {
                 console.log(error);
@@ -87,9 +92,9 @@ const Home = ({ db }) => {
         const refDoc = doc( db, 'todos', id );
         deleteDoc( refDoc )
             .then(() => {
+                updateTodos();
                 setMessage('Tarefa removida com sucesso!');
                 console.log(`${id} removida`);
-                updateTodos();
             })
             .catch((error) => {
                 console.log(error);
@@ -107,6 +112,7 @@ const Home = ({ db }) => {
                         ) : (<ul>
                             { todos.map((todo) => (
                                 <li key={todo.id}>
+                                    <BsThreeDotsVertical />
                                     <Todo
                                         todo={todo}
                                         checkTodo={checkTodo}

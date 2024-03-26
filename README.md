@@ -1,14 +1,12 @@
 # FireTodo
 
-Aplicação web para gerenciar tarefas.
-
-Foi feito utilizando **React** e **Firebase**.
+Um TodoList feito utilizando **React** e **Firebase**.
 
 ## Requisitos
 
 1. Possuir o **NodeJS** instalado em sua máquina;
 
-1. Possuir uma conta no [Firebase](https://firebase.google.com/)
+1. Possuir uma conta no [Firebase](https://firebase.google.com/);
 
 1. Criar um projeto no **Firebase** para armazenar suas tarefas usando essa aplicação. Durante sua criação, será exibido a configuração que deve ser usada para acessar o projeto do **Firebase** dentro de algum programa, essa configuração deve ser copiada dentro do aquivo `/src/components/firebase/Config.jsx` da seguinte maneira:
 
@@ -29,7 +27,7 @@ Foi feito utilizando **React** e **Firebase**.
 
     ![Configurações do projeto no console do Firebase](.github/firebase_configuracoes.png)
 
-1. Dentro do projeto do **Firebase** deve-se configurar o **Authentication** e o **Firestore**, para ser possível criar usuários, se logar e armazenar dados nesta aplicação.
+1. Dentro do projeto do **Firebase** deve-se configurar o **Authentication** e o **Firestore**, para ser possível criar usuários, se logar e armazenar dados nesta aplicação;
 
 1. Em **Cloud Firestore** acesse a aba **Índices** e adicione o seguinte índice:
 

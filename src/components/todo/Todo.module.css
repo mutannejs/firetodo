@@ -1,4 +1,5 @@
 .todo {
+    flex-grow: 1;
     background-color: var(--main-bg-color-light);
     border: 1px solid var(--main-bg-color);
     border-radius: 5px;

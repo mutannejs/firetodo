@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { BsThreeDotsVertical } from "react-icons/bs";
 // Firebase
-import { query, collection, getDocs, where, deleteDoc, doc, updateDoc, orderBy, getCountFromServer } from 'firebase/firestore';
+import { query, collection, getDocs, where, deleteDoc, doc, updateDoc, orderBy, writeBatch } from 'firebase/firestore';
 // Contexts
 import { LoginContext } from '../context/LoginContext';
 // Components
@@ -16,8 +16,9 @@ const Home = ({ db }) => {
 
     const { user } = useContext(LoginContext);
     const [todos, setTodos] = useState([]);
-    //const [numChecked, setNumChecked] = useState();
     const [message, setMessage] = useState('');
+    const [showOrder, setShowOrder] = useState(false);
+    const [indexOrder, setIndexOrder] = useState();
     const location = useLocation();
     
     useEffect(() => {
@@ -101,6 +102,44 @@ const Home = ({ db }) => {
             })
     }
 
+    const toogleOrder = (index) => {
+        const numUnchecked = todos.filter(t => !t.completed).length;
+        if ( numUnchecked <= 1 || index >= numUnchecked )
+            return;
+        setShowOrder(prev => !prev);
+        setIndexOrder(index);
+    }
+
+    const changeOrder = (id, currentOrder, newOrder) => {
+        setShowOrder(prev => !prev); // esconde o input
+        const changedTodo = todos.find(t => t.id === id); // todo que teve a ordem alterada
+        let todosUn = todos.filter(t => !t.completed); // array com todos os todos não marcados
+        const lenUn = todosUn.length; // quantidade de todos não marcados
+
+        // se a ordem onde deseja inserir o elemento não pode ser acessada
+        if (newOrder === currentOrder || newOrder === currentOrder + 1 || newOrder < 0 || newOrder > lenUn)
+            return;
+
+        // reposiciona os itens no vetor
+        if (newOrder > currentOrder)
+            newOrder -= 1;
+        todosUn = todosUn.filter( t => t.id !== id );
+        todosUn.splice( newOrder, 0, changedTodo );
+        todosUn = todosUn.map( (t, i) => { return {...t, order: lenUn - i - 1} } );
+
+        // atualiza os todos que tiveram a ordem alterada
+        const batch = writeBatch(db);
+        todosUn.forEach((t) => {
+            const refDoc = doc( db, 'todos', t.id );
+            batch.update( refDoc, {
+                order: t.order
+            })
+        })
+        batch.commit()
+            .then(() => { updateTodos(); })
+            .catch(()=> console.log('erro na atualização de vários documentos'));
+    }
+
     return (
         <div>
             { user ? (
@@ -110,19 +149,42 @@ const Home = ({ db }) => {
                         { todos.length === 0 ? (
                             <p>Você ainda não possui tarefas</p>
                         ) : (<ul>
-                            { todos.map((todo) => (
+                            { todos.map((todo, index) => (
                                 <li key={todo.id}>
-                                    <BsThreeDotsVertical />
-                                    <Todo
-                                        todo={todo}
-                                        checkTodo={checkTodo}
-                                        uncheckTodo={uncheckTodo}
-                                        deleteTodo={deleteTodo}
-                                    />
+                                    { showOrder && index <= todos.filter(t => !t.completed).length && (
+                                        <div className={styles.separate}>
+                                            <hr />
+                                            <p>{index}</p>
+                                            <hr />
+                                        </div>
+                                    )}
+                                    <div className={styles.todo}>
+                                        <div className={styles.order} onClick={() => toogleOrder(index)}>
+                                            { showOrder && indexOrder === index ? (
+                                                <input type="number" onKeyDown={(e) => {
+                                                    if (e.key == 'Enter') changeOrder(todo.id, index, parseInt(e.target.value))
+                                                }} autoFocus onBlur={() => toogleOrder(index)} />
+                                            ) : (
+                                                <BsThreeDotsVertical />
+                                            )}
+                                        </div>
+                                        <Todo
+                                            todo={todo}
+                                            checkTodo={checkTodo}
+                                            uncheckTodo={uncheckTodo}
+                                            deleteTodo={deleteTodo}
+                                        />
+                                    </div>
                                 </li>
                             ))}
-                        </ul>
-                        )}
+                            { showOrder && todos[todos.length-1].completed === false && (
+                                <div className={styles.separate}>
+                                    <hr />
+                                        <p>{todos.length}</p>
+                                    <hr />
+                                </div>
+                            )}
+                        </ul> )}
                     </div>
                 </div> 
             ) : (

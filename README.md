@@ -1,6 +1,6 @@
 # FireTodo
 
-Um TodoList feito utilizando **React** e **Firebase**.
+TodoList feito utilizando **React** e **Firebase** durante a capacitação da [Beets Jr.](https://beetsjr.com.br/) dessas ferramentas.
 
 ## Requisitos
 
@@ -16,7 +16,7 @@ Um TodoList feito utilizando **React** e **Firebase**.
         authDomain: ...,
         projectId: ...,
         storageBucket: ...,
-        messagingSenderId: .,
+        messagingSenderId: ...,
         appId: ...
     };
     ```

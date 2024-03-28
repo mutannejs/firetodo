@@ -9,15 +9,51 @@
 
 .todos ul li {
     display: flex;
+    flex-direction: column;
+}
+
+.todo {
+    display: flex;
+    align-items: flex-start;
+    margin: .7rem 0;
+}
+
+.separate {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
     align-items: center;
+    color: #000;
 }
 
-.todos > ul > li > svg {
-    margin-right: .5rem;
+.separate p {
+    margin: 0 1rem;
 }
 
-.todos > ul > li > svg:hover {
+.separate hr {
+    flex-grow: 1;
+}
+
+.todos .order {
+    padding: .7rem .5rem 0;
+}
+
+.todos .order:hover {
     cursor: pointer;
+}
+
+.order input {
+    width: 4rem;
+    font-size: .9rem;
+    padding: .2rem 0;
+    color: var(--main-color);
+    border: none;
+    border-bottom: 2px solid var(--main-color);
+    text-shadow: 1px 1px 10px var(--main-bg-color);
+}
+
+.order input:focus {
+    outline: 0;
 }
 
 .container {
